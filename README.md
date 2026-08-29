@@ -4,6 +4,11 @@ A hands-on technical portfolio covering Microsoft Fabric, Azure Databricks, Real
 
 The emphasis here is on **original runnable demos, lab code, architecture exercises and instructor-ready material** rather than collections of external sample repositories.
 
+## Programming languages demonstrated
+
+- **SQL / T-SQL** — SQL Server, Azure SQL Database, Fabric Warehouse, Fabric SQL endpoint analytics, ELT, reconciliation, performance, security and AI-ready schemas
+- **Python / PySpark** — Fabric and Azure Databricks ingestion, transformation, telemetry generation, agent orchestration and AI workflows
+
 ## What is actually built in this repository
 
 | Area | Original artifact |
@@ -12,7 +17,8 @@ The emphasis here is on **original runnable demos, lab code, architecture exerci
 | Fabric Lakehouse / OneLake | PySpark Bronze → Silver → Gold medallion notebook |
 | Fabric Warehouse | Retail star-schema DDL and analytical SQL |
 | Power BI | Direct Lake-oriented DAX measure set and teaching exercise |
-| Azure SQL / SQL Server | Read-only performance triage diagnostic script |
+| Azure SQL / SQL Server | Performance diagnostics, T-SQL engineering patterns, security and transactional examples |
+| SQL Engineering | SQL Server procedures, Fabric SQL endpoint queries, incremental ELT, data quality, Fabric Warehouse, RLS, performance and SQL+AI patterns |
 | Enterprise context & agents | Business entity/context design exercise with governance boundaries |
 | Azure Databricks | Auto Loader Bronze ingestion, Silver data-quality transformation, Gold Databricks SQL metrics, Unity Catalog governance lab |
 | Databricks AI/BI | Conversational analytics instructor guide and semantic ambiguity exercises |
@@ -31,8 +37,25 @@ The emphasis here is on **original runnable demos, lab code, architecture exerci
 - [09 - Azure Databricks](09-azure-databricks/README.md)
 - [10 - Fabric Copilot and Data Agents](10-fabric-copilot-data-agents/README.md)
 - [11 - Agentic AI Workshop Series](11-agentic-ai-workshops/README.md)
+- [12 - SQL Engineering Workshops](12-sql-engineering-workshops/README.md)
 
 ## Featured hands-on labs
+
+### SQL Engineering Workshop Track
+
+`12-sql-engineering-workshops/`
+
+A dedicated SQL evidence track covering:
+
+- SQL Server schema design, constraints, indexing and stored procedures
+- transactional error handling and idempotent service patterns
+- watermark-based incremental ELT and merge/upsert patterns
+- Fabric Warehouse dimensional modeling and serving views
+- Fabric SQL endpoint analytical SQL with window functions
+- source-to-target reconciliation and data quality checks
+- SQL Server / Azure SQL performance diagnostics
+- role-based access and row-level security
+- SQL + AI retrieval schema design and safe data-agent access patterns
 
 ### Manufacturing operations with Fabric RTI
 
