@@ -1,51 +1,49 @@
 # Fabric Real-Time Intelligence
 
-This section covers event-driven analytics patterns in Microsoft Fabric Real-Time Intelligence (RTI): ingestion, transformation, Eventhouse/KQL, real-time visualization, alerting, and agent integration.
+This section contains an original manufacturing operations lab built around Microsoft Fabric Real-Time Intelligence.
 
-## Architecture pattern
+## Lab: manufacturing telemetry
 
-**Sources → Eventstream → Eventhouse/KQL Database → Real-Time Dashboard / Activator / Power BI / Agents**
+Folder: [`lab01-manufacturing-telemetry`](lab01-manufacturing-telemetry/)
 
-Key design questions:
+### Components
 
-1. Which events need low-latency ingestion versus batch landing in OneLake?
-2. What transformations belong in Eventstream versus KQL?
-3. Which data should remain hot in Eventhouse and which should be persisted for broader analytical reuse?
-4. What operational thresholds should drive alerts or downstream actions?
-5. How should real-time context be exposed to AI agents without bypassing governance?
+- `generate_telemetry.py` — generates synthetic press and robot telemetry as newline-delimited JSON.
+- `queries.kql` — operational KQL for current health, trends, alert rate and threshold breaches.
+- `INSTRUCTOR_GUIDE.md` — workshop flow, architecture discussion and learner challenges.
 
-## Suggested hands-on labs
+## Architecture
 
-### Lab 1: Streaming telemetry to Eventhouse
-- Create an Eventstream.
-- Connect a sample event source.
-- Route events to an Eventhouse/KQL database.
-- Validate schema, ingestion rate, and latency.
-- Query latest state using KQL.
+**Synthetic assets → Eventstream → Eventhouse / KQL Database → Real-Time Dashboard → alert / downstream action**
 
-### Lab 2: Real-time operations dashboard
-- Build KQL queries for current state, trend, anomaly, and top-N views.
-- Create a Real-Time Dashboard.
-- Add refresh-aware visuals and operational filters.
-- Define a threshold that could trigger downstream notification/action.
+The demo deliberately separates four concerns:
 
-### Lab 3: Event-driven AI pattern
-- Use real-time business events as context for an agent workflow.
-- Separate deterministic business rules from generative reasoning.
-- Keep operational actions permission-aware and auditable.
+1. event generation and ingestion,
+2. stateful operational analysis,
+3. visualization and monitoring,
+4. governed handoff to downstream automation or AI.
 
-## Upstream Microsoft references
+## Suggested workshop flow
 
-- [Fabric RTI Workshop](https://github.com/microsoft/FabricRTIWorkshop)
-- [FabCon RTI Workshop](https://github.com/microsoft/FabConRTIWorkshop)
-- [Real-Time Intelligence Operations Solution Accelerator](https://github.com/microsoft/real-time-intelligence-operations-solution-accelerator)
-- [Fabric RTI MCP](https://github.com/microsoft/fabric-rti-mcp)
-- [Event-driven RTI using Fabric](https://github.com/microsoft/Event-driven-real-time-intelligence-using-Fabrics-RTI)
-- [Fabric IQ and RTI assets](https://github.com/microsoft/Fabric-IQ-and-Real-Time-Intelligence-assets)
+1. Run the telemetry generator and inspect the event contract.
+2. Ingest the stream into Fabric Eventstream.
+3. Persist it to an Eventhouse table named `AssetTelemetry`.
+4. Execute the supplied KQL queries.
+5. Build a Real-Time Dashboard showing latest state and recent trends.
+6. Design a threshold rule for repeated anomalies.
+7. Discuss when the same data should also be persisted to a Lakehouse for historical analysis.
 
-## What I would extend in a workshop
+## Teaching points
 
-- Add a manufacturing/operations scenario with asset telemetry.
-- Show the same business entity across historical Lakehouse data and live Eventhouse state.
-- Add a semantic/ontology layer so an agent reasons about an `Asset`, `Plant`, `Order`, or `Shipment` rather than raw tables.
-- Demonstrate where KQL, Power BI, and agentic interaction each fit instead of treating them as interchangeable tools.
+- Low latency is not the same as good operational decision design.
+- A single threshold breach and a sustained condition should not be treated identically.
+- Eventstream transformations and KQL transformations solve different parts of the pipeline.
+- Agents should be able to explain operational state without automatically gaining authority to change machinery.
+
+## Extension ideas
+
+- Add work orders and maintenance events.
+- Calculate mean time between failures.
+- Create a second plant and compare operating health.
+- Replace static thresholds with a rolling baseline.
+- Join live asset state with historical maintenance data.
