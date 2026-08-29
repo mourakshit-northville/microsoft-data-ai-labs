@@ -1,0 +1,32 @@
+// Power BI / Direct Lake teaching measures
+
+Total Revenue =
+SUM ( FactSales[NetSales] )
+
+Total Orders =
+DISTINCTCOUNT ( FactSales[SalesId] )
+
+Average Order Value =
+DIVIDE ( [Total Revenue], [Total Orders] )
+
+Revenue YTD =
+TOTALYTD ( [Total Revenue], DimDate[CalendarDate] )
+
+Revenue Prior Year =
+CALCULATE ( [Total Revenue], SAMEPERIODLASTYEAR ( DimDate[CalendarDate] ) )
+
+Revenue YoY % =
+DIVIDE ( [Total Revenue] - [Revenue Prior Year], [Revenue Prior Year] )
+
+Active Customers =
+DISTINCTCOUNT ( FactSales[CustomerKey] )
+
+Revenue per Customer =
+DIVIDE ( [Total Revenue], [Active Customers] )
+
+Discount Rate =
+DIVIDE ( SUM ( FactSales[DiscountAmount] ), SUM ( FactSales[GrossSales] ) )
+
+// Instructor exercise:
+// Create a field parameter that lets learners switch the primary chart between
+// Total Revenue, Total Orders, Average Order Value and Active Customers.
