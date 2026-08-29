@@ -1,0 +1,35 @@
+// Fabric Real-Time Intelligence workshop queries
+// Table assumed: AssetTelemetry
+
+// 1. Latest condition by asset
+AssetTelemetry
+| summarize arg_max(event_time, *) by asset_id
+| project asset_id, plant, line, event_time, temperature_c, vibration_mm_s, pressure_bar, state
+| order by state desc, asset_id asc
+
+// 2. Five-minute operating trend
+AssetTelemetry
+| where event_time > ago(30m)
+| summarize avg_temp=avg(temperature_c), avg_vibration=avg(vibration_mm_s) by asset_id, bin(event_time, 5m)
+| order by event_time asc
+
+// 3. Alert frequency by production line
+AssetTelemetry
+| where event_time > ago(1h)
+| summarize events=count(), alerts=countif(state == "ALERT") by plant, line
+| extend alert_rate = round(100.0 * todouble(alerts) / todouble(events), 2)
+| order by alert_rate desc
+
+// 4. Assets that crossed both thermal and vibration thresholds
+AssetTelemetry
+| where event_time > ago(15m)
+| where temperature_c >= 82 and vibration_mm_s >= 4.5
+| summarize occurrences=count(), last_seen=max(event_time), max_temp=max(temperature_c), max_vibration=max(vibration_mm_s) by asset_id
+| order by occurrences desc
+
+// 5. Simple operational health classification
+AssetTelemetry
+| where event_time > ago(10m)
+| summarize temp=avg(temperature_c), vibration=avg(vibration_mm_s) by asset_id
+| extend health = case(temp >= 82 or vibration >= 4.5, "Critical", temp >= 76 or vibration >= 3.2, "Watch", "Normal")
+| order by health asc, asset_id asc
