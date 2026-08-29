@@ -1,0 +1,86 @@
+domain: SalesOperations
+version: 1.0
+purpose: >
+  Workshop ontology for connecting customer, order, product, plant and asset
+  concepts to governed analytical and operational data.
+
+entities:
+  Customer:
+    key: customer_id
+    attributes:
+      - name: customer_name
+        type: string
+      - name: segment
+        type: string
+      - name: region
+        type: string
+
+  Order:
+    key: order_id
+    attributes:
+      - name: order_ts
+        type: timestamp
+      - name: order_amount
+        type: decimal
+      - name: status
+        type: string
+
+  Product:
+    key: product_id
+    attributes:
+      - name: product_name
+        type: string
+      - name: category
+        type: string
+
+  Plant:
+    key: plant_id
+    attributes:
+      - name: plant_name
+        type: string
+      - name: city
+        type: string
+
+  Asset:
+    key: asset_id
+    attributes:
+      - name: asset_type
+        type: string
+      - name: operational_state
+        type: string
+      - name: last_event_time
+        type: timestamp
+
+relationships:
+  - from: Customer
+    relation: places
+    to: Order
+    cardinality: one-to-many
+
+  - from: Order
+    relation: contains
+    to: Product
+    cardinality: many-to-many
+
+  - from: Plant
+    relation: operates
+    to: Asset
+    cardinality: one-to-many
+
+business_terms:
+  Revenue:
+    definition: Sum of valid net order amount for the selected period.
+    entity: Order
+
+  ActiveCustomer:
+    definition: Customer with at least one valid order in the selected period.
+    entity: Customer
+
+  CriticalAsset:
+    definition: Asset whose latest operational state is ALERT or breaches approved thresholds.
+    entity: Asset
+
+governance:
+  defaults:
+    access: read-only
+    action_policy: human-approval-required-for-operational-changes
