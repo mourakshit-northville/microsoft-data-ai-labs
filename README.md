@@ -1,6 +1,6 @@
 # Microsoft Data & AI Labs
 
-A hands-on technical portfolio centered on Microsoft Fabric and Real-Time Intelligence, with supporting work across OneLake, Lakehouse, Fabric Warehouse, Power BI, Azure SQL, SQL Server, Copilot, Fabric IQ, Data Agents and enterprise Agentic AI patterns.
+A hands-on technical portfolio centered on Microsoft Fabric and Real-Time Intelligence, with supporting work across OneLake, Lakehouse, Fabric Warehouse, Power BI, Azure SQL, SQL Server, Copilot, Fabric IQ, Data Agents, enterprise Agentic AI, and Databricks enterprise intelligence patterns.
 
 The emphasis here is on **original runnable demos, lab code, architecture exercises and instructor-ready material**.
 
@@ -22,6 +22,7 @@ The emphasis here is on **original runnable demos, lab code, architecture exerci
 | Fabric IQ and enterprise context | Business entity and ontology design exercises with governance boundaries |
 | Fabric Data Agents | Agent evaluation dataset covering analytics, ambiguity, causality and action safety |
 | Agentic AI | Safe tool contracts, agentic RAG, multi-agent orchestration, evaluation, threat modeling, event-driven agents, governed SQL agents and MCP workshops |
+| Databricks Enterprise Intelligence | MouCo Enterprise Intelligence track for governed AI, semantic context, agent-ready enterprise data and Databricks architecture extensions |
 
 ## Repository map
 
@@ -35,6 +36,7 @@ The emphasis here is on **original runnable demos, lab code, architecture exerci
 - [10 - Fabric Copilot and Data Agents](10-fabric-copilot-data-agents/README.md)
 - [11 - Agentic AI Workshop Series](11-agentic-ai-workshops/README.md)
 - [12 - SQL Engineering Workshops](12-sql-engineering-workshops/README.md)
+- [13 - MouCo Enterprise Intelligence (Databricks)](13-mouco-enterprise-intelligence/README.md)
 
 ## Featured hands-on labs
 
@@ -68,15 +70,21 @@ A dedicated SQL evidence track covering SQL Server schema design, stored procedu
 
 A connected set of original workshops covering safe tool use, agentic RAG, multi-agent orchestration, evaluation, observability, governance, prompt injection, event-driven agents, governed SQL data agents and MCP. The material is designed so it can be delivered as individual community sessions or combined into a full-day workshop.
 
+### MouCo Enterprise Intelligence
+
+`13-mouco-enterprise-intelligence/`
+
+A Databricks-focused technical track for enterprise intelligence, governed AI, semantic context, agent-ready data and architecture extensions. It references collaborative upstream work while keeping Mou's GitHub identity and portfolio URLs stable.
+
 ## How I structure workshops
 
 Each lab is designed around four layers:
 
 1. **Build** — create something concrete with SQL, KQL, Python, PySpark or DAX.
-2. **Explain** — connect each artifact to the architecture and the Microsoft capability it represents.
+2. **Explain** — connect each artifact to the architecture and the Microsoft or Databricks capability it represents.
 3. **Challenge** — give learners a change that forces them to reason instead of follow steps mechanically.
 4. **Operate** — discuss governance, security, observability, cost, deployment and production trade-offs.
 
 ## Portfolio note
 
-The implementation files in this repository are purpose-built for this portfolio and workshop use, with a deliberate focus on Microsoft data, analytics and AI technologies.
+The implementation files in this repository are purpose-built for this portfolio and workshop use. The Databricks collaboration track preserves source attribution for upstream collaborative work while providing a dedicated location for Mou Rakshit's maintained extensions and technical learning assets.
